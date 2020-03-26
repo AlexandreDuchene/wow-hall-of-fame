@@ -1,0 +1,6 @@
+{
+    "warcraftlogs": {
+        "path": "BASE_PATH",
+        "key": "YOUR_APP_ID"
+    }
+}
