@@ -9,34 +9,34 @@ const getCall = function (route,) {
 };
 
 Meteor.methods({
-    'getWLZones': function () {
+    'warcraftLogs.getZones': function () {
         return getCall('zones');
     },
-    'getWLClasses': function () {
+    'warcraftLogs.getClasses': function () {
         return getCall('classes');
     },
-    'getWLRankingsByEncouter': function (id) {
+    'warcraftLogs.getRankingsByEncouter': function (id) {
         return getCall('encounters/' + id);
     },
-    'getWLRankingsByCharacter': function (charName, server, region) {
+    'warcraftLogs.getRankingsByCharacter': function (charName, server, region) {
         return getCall('rankings/character/' + charName + '/' + server + '/' + region);
     },
-    'getWLParses': function (charName, server, region) {
+    'warcraftLogs.getParses': function (charName, server, region) {
         return getCall('parses/character/' + charName + '/' + server + '/' + region);
     },
-    'getWLReportsByGuild': function (guildName, server, region) {
+    'warcraftLogs.getReportsByGuild': function (guildName, server, region) {
         return getCall('reports/guild/' + guildName + '/' + server + '/' + region);
     },
-    'getWLReportsByUser': function (username) {
+    'warcraftLogs.getReportsByUser': function (username) {
         return getCall('reports/user/' + username);
     },
-    'getWLReportFights': function (reportId) {
+    'warcraftLogs.getReportFights': function (reportId) {
         return getCall('report/fights/' + reportId);
     },
-    'getWLReportEvents': function (eventName, reportId) {
+    'warcraftLogs.getReportEvents': function (eventName, reportId) {
         return getCall('report/events/' + eventName + '/' + reportId);
     },
-    'getWLReportEventsSum': function (eventName, reportId) {
+    'warcraftLogs.getReportEventsSum': function (eventName, reportId) {
         return getCall('report/tables/' + eventName + '/' + reportId);
     }
 });

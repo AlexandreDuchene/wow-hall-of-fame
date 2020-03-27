@@ -1,5 +1,3 @@
-import {Achievement} from "../achievements/achievements";
-
 const damageDone = 'damage-done';
 const damageTaken = 'damage-done';
 const healing =  'healing';
@@ -10,7 +8,7 @@ const debuffs = 'debuffs';
 const deaths = 'deaths';
 const survivability = 'survivability';
 const resources = 'resources';
-const ressourcesGains = 'resources-gains';
+const resourcesGains = 'resources-gains';
 
 export const reportTypes = [
     damageDone,
@@ -23,7 +21,7 @@ export const reportTypes = [
     deaths,
     survivability,
     resources,
-    ressourcesGains
+    resourcesGains
 ];
 
 export const Report = new Mongo.Collection('reports');
@@ -34,7 +32,7 @@ Report.schema = new SimpleSchema({
 });
 
 reportTypes.forEach(function(reportType) {
-    Report[reportType] = {
+    Report.schema[reportType] = {
         type: Map
     }
 });

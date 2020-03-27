@@ -7,7 +7,7 @@ Achievement.schema = new SimpleSchema({
         type: String,
         required: true,
         index: true,
-        validate: val => val/length > 0
+        validate: val => val.length > 0
     },
     img: {
         type: String,
@@ -15,19 +15,10 @@ Achievement.schema = new SimpleSchema({
         validate: val =>
             fs.existsSync(val)
     },
-    encounterId: {
-        type: Number,
-        required: false,
-        get: val => Math.round(val),
-        set: val => Math.round(val),
-        validate: val =>
-            _.isInteger(val) && val > 0
-    },
-    reportType: {
+    description: {
         type: String,
         required: true,
-        validate: val =>
-            reportTypes.includes(val)
+        validate: val => val.length > 0
     },
     characters: [{
         character: Character,
