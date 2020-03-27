@@ -1,6 +1,9 @@
 {
     "warcraftlogs": {
+        "guildName": "YOUR_GUILD",
+        "key": "YOUR_APP_ID",
         "path": "BASE_PATH",
-        "key": "YOUR_APP_ID"
+        "region": "YOUR_REGION",
+        "server": "YOUR_SERVER"
     }
 }

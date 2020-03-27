@@ -1,5 +1,5 @@
 const damageDone = 'damage-done';
-const damageTaken = 'damage-done';
+const damageTaken = 'damage-taken';
 const healing =  'healing';
 const casts = 'casts';
 const summons = 'summons';
@@ -27,7 +27,10 @@ export const reportTypes = [
 export const Report = new Mongo.Collection('reports');
 Report.schema = new SimpleSchema({
     _id: String,
-    title: String,
+    title: {
+        type: String,
+        min: 0
+    },
     date: Date
 });
 

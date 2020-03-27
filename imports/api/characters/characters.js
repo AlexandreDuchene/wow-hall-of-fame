@@ -1,26 +1,20 @@
 import { Mongo } from 'meteor/mongo';
-import {Achievement} from "../achievements/achievements";
+import { Achievement } from "../achievements/achievements";
 
 export const Character = new Mongo.Collection('characters');
 Character.schema = new SimpleSchema({
     name: {
         type: String,
-        required: true,
-        index: true,
-        validate: val =>
-            val.length >= 2 && val.length <= 12
+        min: 2,
+        max: 12
     },
     guid: {
-        type: Number,
-        required: true,
-        validate: val =>
-            _.isInteger(val) && val > 0
+        type: SimpleSchema.Integer,
+        min: 0
     },
-    achievements: [{
-        achievement: Achievement,
-        date: {
-            type: Date,
-            required: true,
-        }
-    }]
+    achievements: {
+        type: Array
+    },
+    'achievements.$': Achievement.schema,
+    'characters.$.date': Date
 });
