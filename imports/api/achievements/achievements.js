@@ -5,19 +5,29 @@ export const Achievement = new Mongo.Collection('achievements');
 Achievement.schema = new SimpleSchema({
     name: {
         type: String,
-        min: 0
+        min: 0,
     },
     img: {
         type: String,
-        regEx: /\.(gif|jpe?g|tiff|png|webp|bmp)$/i
+        regEx: /\.(gif|jpe?g|tiff|png|webp|bmp)$/i,
     },
     description: {
         type: String,
-        min: 0
+        min: 0,
     },
     characters: {
-        type: Array
+        type: [Object],
     },
-    'characters.$': Character.schema,
-    'characters.$.date': Date
+    'characters.$.name':  {
+        type: String,
+        min: 2,
+        max: 12,
+    },
+    'characters.$.guid': {
+        type: SimpleSchema.Integer,
+        min: 0,
+    },
+    'characters.$.date': {
+        type: Date,
+    },
 });

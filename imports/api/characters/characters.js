@@ -6,15 +6,16 @@ Character.schema = new SimpleSchema({
     name: {
         type: String,
         min: 2,
-        max: 12
+        max: 12,
     },
     guid: {
         type: SimpleSchema.Integer,
-        min: 0
+        min: 0,
     },
     achievements: {
-        type: Array
+        type: [Achievement.schema]
     },
-    'achievements.$': Achievement.schema,
-    'characters.$.date': Date
+    'achievements.$.date': {
+        type: Date,
+    },
 });

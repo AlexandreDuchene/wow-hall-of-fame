@@ -21,21 +21,22 @@ export const reportTypes = [
     deaths,
     survivability,
     resources,
-    resourcesGains
+    resourcesGains,
 ];
 
 export const Report = new Mongo.Collection('reports');
 Report.schema = new SimpleSchema({
-    _id: String,
     title: {
         type: String,
         min: 0
     },
-    date: Date
+    date: {
+        type: Date,
+    },
 });
 
 reportTypes.forEach(function(reportType) {
     Report.schema[reportType] = {
-        type: Map
+        type: Map,
     }
 });
