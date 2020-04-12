@@ -7,8 +7,6 @@ const buffs = 'buffs';
 const debuffs = 'debuffs';
 const deaths = 'deaths';
 const survivability = 'survivability';
-const resources = 'resources';
-const resourcesGains = 'resources-gains';
 
 export const reportTypes = [
     damageDone,
@@ -20,8 +18,6 @@ export const reportTypes = [
     debuffs,
     deaths,
     survivability,
-    resources,
-    resourcesGains,
 ];
 
 export const Report = new Mongo.Collection('reports');
