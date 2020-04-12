@@ -1,5 +1,5 @@
 import { Mongo } from 'meteor/mongo';
-import { Character } from "../characters/characters";
+import {Character} from "../characters/characters";
 
 export const Achievement = new Mongo.Collection('achievements');
 Achievement.schema = new SimpleSchema({
@@ -16,16 +16,7 @@ Achievement.schema = new SimpleSchema({
         min: 0,
     },
     characters: {
-        type: [Object],
-    },
-    'characters.$.name':  {
-        type: String,
-        min: 2,
-        max: 12,
-    },
-    'characters.$.guid': {
-        type: SimpleSchema.Integer,
-        min: 0,
+        type: [Character],
     },
     'characters.$.date': {
         type: Date,
