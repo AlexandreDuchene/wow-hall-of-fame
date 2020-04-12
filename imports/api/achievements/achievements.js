@@ -1,5 +1,5 @@
 import { Mongo } from 'meteor/mongo';
-import {Character} from "../characters/characters";
+import { addAchievement, Character } from "../characters/characters";
 
 export const Achievement = new Mongo.Collection('achievements');
 Achievement.schema = new SimpleSchema({
@@ -22,3 +22,38 @@ Achievement.schema = new SimpleSchema({
         type: Date,
     },
 });
+
+export const addAchievementForCharacter = function(id, character, date)
+{
+    let achievement = Achievement.findOne({ _id: id });
+
+    character.date = date;
+
+    delete character.achievements;
+
+    if (achievement === undefined) {
+        achievement = insertAchievement(id, '','','', [character]);
+    } else {
+        Achievement.update({ _id: id }, {
+            $addToSet: { characters: character }
+        });
+    }
+
+    achievement.date = date;
+    addAchievement(character, achievement);
+};
+
+const insertAchievement = function(id, name, img, description, characters)
+{
+    let achievement = {
+        _id: id,
+        name: name,
+        img: img,
+        description: description,
+        characters: characters,
+    };
+
+    Achievement.insert(achievement);
+
+    return achievement;
+};

@@ -10,10 +10,10 @@ const debuffs = 'debuffs';
 const deaths = 'deaths';
 const survivability = 'survivability';
 
-const zoneMC = 1000;
-const zoneOnyxia = 1001
-const zoneBWL = 1002;
-const zoneZG = 1003;
+export const zoneMC = 1000;
+export const zoneOnyxia = 1001
+export const zoneBWL = 1002;
+export const zoneZG = 1003;
 
 export const zones = [
     zoneMC,

@@ -43,3 +43,14 @@ Character.schema = new SimpleSchema({
         type: Date,
     },
 });
+
+export const addAchievement = function(character, achievement)
+{
+    delete achievement.characters;
+
+    if (Character.findOne({ guid: character.guid, achievements: achievement }) === undefined) {
+        Character.update({ guid: character.guid }, {
+            $push: { achievements: achievement }
+        });
+    }
+}
