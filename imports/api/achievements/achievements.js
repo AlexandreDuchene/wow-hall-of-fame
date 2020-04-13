@@ -32,7 +32,13 @@ export const addAchievementForCharacter = function(id, character, date)
     delete character.achievements;
 
     if (achievement === undefined) {
-        achievement = insertAchievement(id, '','','', [character]);
+        achievement = insertAchievement(
+            id,
+            'achievement.' + id + '.name',
+            id + '.jpg',
+            'achievement.' + id + '.description',
+            [character]
+        );
     } else {
         Achievement.update({ _id: id }, {
             $addToSet: { characters: character }
