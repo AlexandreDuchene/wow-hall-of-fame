@@ -34,7 +34,6 @@ Meteor.call(
                                         name: friendly.name,
                                         guid: friendly.guid,
                                         class: friendly.type,
-                                        achievements: [],
                                     };
 
                                     characters.push(character);

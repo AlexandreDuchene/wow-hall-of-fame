@@ -1,15 +1,19 @@
-import { addAchievementForCharacter } from "./achievements";
+import {addAchievementForCharacter, initAchievement} from "./achievements";
 
 const dunceCap = 'dunceCap';
 const carrotOnAStickId = 11122;
 const theMachine = 'theMachine';
 
 export const computeCastsAchievements = function (report) {
-    let casts = report['casts']['entries'];
+    const casts = report['casts']['entries'];
+
+    const dunceCapAchievement = initAchievement(dunceCap);
+    const theMachineAchievement = initAchievement(theMachine);
 
     // theMachine
     let maxTotalCasts = 0;
     let MaxTotalCastsCharacter;
+
 
     report.characters.forEach(function(character) {
         // dunceCap
@@ -34,12 +38,12 @@ export const computeCastsAchievements = function (report) {
 
         // dunceCap
         if (hasCarrotOnAStickEquipped) {
-            addAchievementForCharacter(dunceCap, character, report.date);
+            addAchievementForCharacter(dunceCapAchievement, character, report);
         }
     });
 
     // theMachine
     if (MaxTotalCastsCharacter !== undefined) {
-        addAchievementForCharacter(theMachine, MaxTotalCastsCharacter, report.date);
+        addAchievementForCharacter(theMachineAchievement, MaxTotalCastsCharacter, report);
     }
 };

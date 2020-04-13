@@ -1,1 +1,1 @@
-import '/imports/ui/lang/fr.js';
+// import '/imports/ui/lang/fr.js';

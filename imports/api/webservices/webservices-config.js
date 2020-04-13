@@ -25,6 +25,6 @@ export const httpGet = function (url, callback) {
 // https://classic.warcraftlogs.com/v1/docs/
 export const warcraftlogsGuildName = Meteor.settings.warcraftlogs.guildName;
 export const warcraftlogsKey = Meteor.settings.warcraftlogs.key;
-export const warcraftlogsPath = Meteor.settings.warcraftlogs.path;
+export const warcraftlogsApiPath = Meteor.settings.warcraftlogs.apiPath;
 export const warcraftlogsRegion = Meteor.settings.warcraftlogs.region;
 export const warcraftlogsServer = Meteor.settings.warcraftlogs.server;

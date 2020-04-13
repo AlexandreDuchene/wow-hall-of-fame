@@ -38,7 +38,7 @@ export const Report = new Mongo.Collection('reports');
 Report.schema = new SimpleSchema({
     title: {
         type: String,
-        min: 0,
+        min: 1,
     },
     date: {
         type: Date,

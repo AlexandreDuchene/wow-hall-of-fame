@@ -1,17 +1,22 @@
-import { addAchievementForCharacter } from "./achievements";
+import {addAchievementForCharacter, initAchievement} from "./achievements";
 
 const over900 = 'over900';
 
 export const computeDamageDoneAchievements = function (report) {
-    let damageDone = report['damage-done']['entries'];
+    const damageDone = report['damage-done']['entries'];
+
+    const over900Achievement = initAchievement(over900);
 
     report.characters.forEach(function(character) {
         for (const damage of damageDone) {
             if (damage.guid === character.guid) {
                 // Time is in milliseconds
-                const dps = (damage.total / (damage.activeTime / 1000));
-                if (dps > 900) {
-                    addAchievementForCharacter(over900, character, report.date);
+                const activeTime = damage.activeTime / 1000;
+                // Some healers have a dps activity of a few seconds and can reach large amounts of dps, but it is irrelevant
+                if (activeTime > 60) {
+                    if ((damage.total / activeTime) > 900) {
+                        addAchievementForCharacter(over900Achievement, character, report);
+                    }
                 }
             }
         }

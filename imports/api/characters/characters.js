@@ -1,5 +1,4 @@
-import { Mongo } from 'meteor/mongo';
-import { Achievement } from "../achievements/achievements";
+import {Mongo} from 'meteor/mongo';
 
 const demonist = 'Demonist';
 const druid = 'Druid';
@@ -30,27 +29,95 @@ Character.schema = new SimpleSchema({
     },
     guid: {
         type: SimpleSchema.Integer,
-        min: 0,
+        min: 1,
     },
     class: {
         type: String,
         allowedValues: classes,
     },
-    achievements: {
-        type: [Achievement.schema]
+    achievementsCount: {
+        type: SimpleSchema.Integer,
+        min: 0,
     },
-    'achievements.$.date': {
+    achievements: {
+        type: [Object],
+    },
+    'achievement.$.name': {
+        type: String,
+        min: 0,
+    },
+    'achievement.$.img': {
+        type: String,
+        regEx: /\.(gif|jpe?g|tiff|png|webp|bmp)$/i,
+    },
+    'achievement.$.description': {
+        type: String,
+        min: 1,
+    },
+    'achievement.$.count': {
+        type: SimpleSchema.Integer,
+        min: 0,
+    },
+    'achievement.$.dates': {
+        type: [Object],
+    },
+    'achievement.$.dates.report': {
+        type: String,
+        min: 1,
+    },
+    'achievement.$.dates.date': {
         type: Date,
     },
 });
 
-export const addAchievement = function(character, achievement)
+export const addAchievement = function (guid, achievement, report)
 {
-    delete achievement.characters;
-
-    if (Character.findOne({ guid: character.guid, achievements: achievement }) === undefined) {
-        Character.update({ guid: character.guid }, {
-            $push: { achievements: achievement }
-        });
+    let character = Character.findOne({guid: guid});
+    if ( undefined === character) {
+        return;
     }
+
+    let characterContainsAchievement = false;
+
+    if (undefined!== character.achievementsCount) {
+        character.achievementsCount++;
+    } else {
+        character.achievementsCount = 1;
+    }
+
+    if (undefined !== character.achievements) {
+        for (let ach of character.achievements) {
+            if (ach._id === achievement._id) {
+                ach.count ++;
+                ach.dates.push({
+                    report: report._id,
+                    date: report.date,
+                });
+
+                characterContainsAchievement = true;
+                break;
+            }
+        }
+    }
+
+    if (!characterContainsAchievement) {
+        let achievementForCharacter = JSON.parse(JSON.stringify(achievement));
+        achievementForCharacter.dates = [{
+            report: report._id,
+            date: report.date,
+        }];
+        achievementForCharacter.count = 1;
+        delete achievementForCharacter.characters;
+
+        if (undefined !== character.achievements) {
+            character.achievements.push(achievementForCharacter);
+        } else {
+            character.achievements = [achievementForCharacter];
+        }
+    }
+
+    Character.update(
+        { guid: character.guid },
+        character
+    );
 }

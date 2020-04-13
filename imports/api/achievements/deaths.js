@@ -1,10 +1,13 @@
 import { zoneMC } from '/imports/api/reports/reports';
-import { addAchievementForCharacter } from "./achievements";
+import {addAchievementForCharacter, initAchievement} from "./achievements";
 
 const snowflake = 'snowflake';
 
 export const computeDeathsAchievements = function (report) {
-    let deaths = report['deaths']['entries'];
+    const deaths = report['deaths']['entries'];
+
+    const snowflakeAchievement = initAchievement(snowflake);
+
     // snowflake
     if (report.zone === zoneMC) {
         report.characters.forEach(function(character) {
@@ -17,7 +20,7 @@ export const computeDeathsAchievements = function (report) {
             }
 
             if (isSnowFlake) {
-                addAchievementForCharacter(snowflake, character, report.date);
+                addAchievementForCharacter(snowflakeAchievement, character, report);
             }
         });
     }

@@ -1,8 +1,8 @@
-import {httpGet, warcraftlogsKey, warcraftlogsPath} from "./webservices-config";
+import {httpGet, warcraftlogsKey, warcraftlogsApiPath} from "./webservices-config";
 
 // https://classic.warcraftlogs.com/v1/docs/
 const getCall = function (route) {
-    let url  = warcraftlogsPath + route + (route.includes('?') ? '&' : '?') + 'api_key=' + warcraftlogsKey;
+    let url  = warcraftlogsApiPath + route + (route.includes('?') ? '&' : '?') + 'api_key=' + warcraftlogsKey;
 
     return Meteor.wrapAsync(httpGet)(url);
 };
