@@ -46,14 +46,18 @@
                                                 </v-list-item-title>
                                                 </template>
                                                 <v-card>
-                                                    <v-card-title>
-                                                        <v-img :src="'img/achievement/' + achievement.img " max-height="36px" max-width="36px" class="mr-2 mb-2"></v-img>
-                                                        {{ $t(achievement.name) }} - {{ character.name }}
-                                                    </v-card-title>
+                                                    <v-card-title class="mx-auto">
+                                                        <v-img :src="'img/achievement/' + achievement.img " max-height="36px" max-width="36px" class="mr-2 mb-2 d-inline-flex"></v-img>
+                                                        {{ $t(achievement.name) }}
+                                                    </v-card-title >
+                                                    <v-card-subtitle class="mx-auto">
+                                                        <v-img :src="'img/class/' + character.class.toLowerCase() + '.jpg'" max-height="20px" max-width="20px" class="mr-2 mt-2 d-inline-flex"></v-img>
+                                                        {{ character.name }}
+                                                    </v-card-subtitle>
                                                     <v-card-text>
                                                         <v-list-item v-for="date of character.dates">
                                                             <v-list-item-title>
-                                                                <a target="_blank" rel="noopener noreferrer" :href="settings.warcraftlogsUrl + '/reports/' + date.report"> {{ $d(date.date, 'short') }}</a>
+                                                                <a target="_blank" rel="noopener noreferrer" :href="settings.warcraftlogsUrl + '/reports/' + date.report" class="mx-auto"> {{ $d(date.date, 'short') }}</a>
                                                             </v-list-item-title>
                                                         </v-list-item>
                                                     </v-card-text>
