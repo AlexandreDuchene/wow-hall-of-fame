@@ -1,11 +1,9 @@
 <template>
-    <!-- App.vue -->
-
     <v-app>
         <v-app-bar app>
             <v-row align="center">
                 <v-img src="img/logo.png" max-height="60px" max-width="60px"></v-img>
-                <h1 class="font-weight-black red--text text--darken-4">OVERLOAD - HALL OF FAME</h1>
+                <h1 class="font-weight-black red--text text--darken-4">{{ settings.guildName }} - HALL OF FAME</h1>
             </v-row>
         </v-app-bar>
 
@@ -78,3 +76,9 @@
 
 <script>
 </script>
+
+<style>
+    h1 {
+        text-transform: uppercase;
+    }
+</style>

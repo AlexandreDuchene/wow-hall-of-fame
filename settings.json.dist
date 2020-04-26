@@ -1,6 +1,7 @@
 {
     "public": {
-        "warcraftlogsUrl": "URL"
+        "warcraftlogsUrl": "URL",
+        "guildName": "YOUR_GUILDE_NAME"
     }
     "warcraftlogs": {
         "guildName": "YOUR_GUILD",
