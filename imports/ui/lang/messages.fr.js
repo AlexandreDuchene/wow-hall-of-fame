@@ -21,5 +21,6 @@ export const messages = {
                 'description': 'Avoir fait le plus d\'actions parmi les joueurs au cours d\'une même session de jeu',
             },
         },
+        'dark-theme': 'Thême sombre'
     },
 };

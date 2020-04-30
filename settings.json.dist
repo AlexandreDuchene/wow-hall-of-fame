@@ -2,11 +2,13 @@
     "public": {
         "warcraftlogsUrl": "URL",
         "guildName": "YOUR_GUILDE_NAME"
+        "region": "YOUR_REGION",
+        "server": "YOUR_SERVER"
     }
     "warcraftlogs": {
-        "guildName": "YOUR_GUILD",
         "key": "YOUR_APP_ID",
         "apiPath": "API_BASE_PATH",
+        "guildName": "YOUR_GUILD",
         "region": "YOUR_REGION",
         "server": "YOUR_SERVER"
     }
