@@ -19,8 +19,8 @@
                     <v-list-item-avatar>
                         <v-switch id="switch-theme" @change="setTheme" color="red darken-4"></v-switch>
                     </v-list-item-avatar>
-                    <v-list-item-title class="font-weight-black red--text text--darken-4">
-                        <label for="switch-theme">{{ $t('dark-theme') }}</label>
+                    <v-list-item-title>
+                        <label class="font-weight-black red--text text--darken-4" for="switch-theme">{{ $t('dark-theme') }}</label>
                     </v-list-item-title>
                 </v-list-item>
                 <v-list-item>
@@ -47,7 +47,7 @@
                                 </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title>
-                                        <v-badge v-if="achievement.count > 0" inline color="red darken-4" :content="achievement.count">
+                                        <v-badge v-if="achievement.count > 0" inline color="red darken-4" class="mt-0" :content="achievement.count">
                                             {{ $t(achievement.name) }}
                                         </v-badge>
                                         <span v-else>
@@ -64,8 +64,7 @@
                         <v-expansion-panel-content>
                             <v-list dense>
                                 <v-list-item v-for="character of achievement.characters" link>
-                                    <v-list-item-content>
-                                        <v-dialog  scrollable max-width="300px">
+                                        <v-dialog scrollable max-width="300px">
                                             <template v-slot:activator="{ on }">
                                                 <v-list-item-title v-on="on">
                                                     <v-badge inline color="red darken-4" :content="character.count">
@@ -78,21 +77,23 @@
                                                 <v-card-title class="mx-auto">
                                                     <v-img :src="'img/achievement/' + achievement.img " max-height="36px" max-width="36px" class="mr-2 mb-2 d-inline-flex"></v-img>
                                                     {{ $t(achievement.name) }}
-                                                </v-card-title >
-                                                <v-card-subtitle class="mx-auto">
-                                                    <v-img :src="'img/class/' + character.class.toLowerCase() + '.jpg'" max-height="20px" max-width="20px" class="mr-2 mt-2 d-inline-flex"></v-img>
-                                                    {{ character.name }}
+                                                </v-card-title>
+                                                <v-card-subtitle class="mt-1 pb-0">
+                                                    {{ $t('obtained-by') }}
+                                                    <v-img :src="'img/class/' + character.class.toLowerCase() + '.jpg'" max-height="1rem" max-width="1rem" class="ml-1 d-inline-flex"></v-img>
+                                                    {{ character.name + ' ' +  $t('the') + ' :' }}
                                                 </v-card-subtitle>
                                                 <v-card-text>
-                                                    <v-list-item v-for="date of character.dates">
-                                                        <v-list-item-title>
-                                                            <a target="_blank" rel="noopener noreferrer" :href="settings.warcraftlogsUrl + '/reports/' + date.report" class="mx-auto"> {{ $d(date.date, 'short') }}</a>
-                                                        </v-list-item-title>
-                                                    </v-list-item>
+                                                    <v-list dense>
+                                                        <v-list-item v-for="date of character.dates" link :href="settings.warcraftlogsUrl + 'reports/' + date.report" target="_blank">
+                                                            <v-list-item-title class="mx-auto font-weight-black red--text text--darken-4">
+                                                                {{ $d(date.date, 'short') }}
+                                                            </v-list-item-title>
+                                                        </v-list-item>
+                                                    </v-list>
                                                 </v-card-text>
                                             </v-card>
                                         </v-dialog>
-                                    </v-list-item-content>
                                 </v-list-item>
                             </v-list>
                         </v-expansion-panel-content>
@@ -113,7 +114,6 @@
 <style>
     a {
         text-decoration: none;
-        color: inherit;
     }
 
     label {
