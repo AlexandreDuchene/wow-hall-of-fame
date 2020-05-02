@@ -1,5 +1,9 @@
-import {Achievement} from "../achievements";
+import { Achievement } from "../achievements";
+import { Character } from "../../characters/characters";
 
-Meteor.publish('achievements.all', function() {
+Meteor.publish('achievements', function() {
     return Achievement.find();
+});
+Meteor.publish('characters', function () {
+    return Character.find();
 });

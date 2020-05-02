@@ -21,6 +21,8 @@ export const messages = {
                 'description': 'Avoir fait le plus d\'actions parmi les joueurs au cours d\'une même session de jeu',
             },
         },
+        'achievements': 'Haut faits',
+        'characters': 'Personnages',
         'dark-theme': 'Thême sombre',
         'obtained-by': 'Obtenu par',
         'the': 'le',
