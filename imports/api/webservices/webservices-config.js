@@ -10,8 +10,8 @@ export const httpGet = function (url, callback) {
         let errorCode, errorMessage;
 
         if (error.response) {
-            errorCode = error.response.data.code;
-            errorMessage = error.response.data.message;
+            errorCode = error.response.statusCode ;
+            errorMessage = error.response.content;
         } else {
             errorCode = 500;
             errorMessage = 'Cannot access the API';

@@ -11,12 +11,11 @@ Meteor.call(
         if (error) {
             console.log(error);
         } else {
+            reportLoop:
             for (const report of result) {
                 if (Report.findOne({_id: report.id}) !== undefined) {
                     continue;
                 }
-
-                console.log(report);
 
                 // Fetching characters
                 let characters = [];
@@ -38,11 +37,7 @@ Meteor.call(
 
                                     characters.push(character);
 
-                                    let insertResult = Character.upsert({ guid: character.guid }, character);
-                                    if (typeof insertResult.insertedId != 'undefined') {
-                                        console.log(character);
-                                        console.log('New character synced');
-                                    }
+                                    Character.upsert({ guid: character.guid }, character);
                                 }
                             });
                         }
@@ -57,23 +52,20 @@ Meteor.call(
                     characters: characters,
                 };
                 // fetching each reportType one by one because the API doesn't allow us to fetch all at once
-                reportTypes.forEach(function(reportType) {
-                    Meteor.call(
-                        'warcraftLogs.getReportEventsSum',
-                        reportType,
-                        report.id,
-                        function (error, result) {
-                            if (error) {
-                                console.log(error);
-                            } else {
-                                newReport[reportType] = result;
-                            }
-                        }
-                    );
-                });
+                for (const reportType of reportTypes) {
+                    try {
+                        newReport[reportType] = Meteor.call(
+                            'warcraftLogs.getReportEventsSum',
+                            reportType,
+                            report.id
+                        );
+                    } catch (e) {
+                        console.log(e);
+                        continue reportLoop;
+                    }
+                };
 
                 Report.insert(newReport);
-                console.log('New report synced.')
             }
         }
     }
