@@ -8,13 +8,13 @@
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
-    "@babel/runtime": "^7.8.3",
+    "@babel/runtime": "^7.9.6",
     "jquery": "^3.5.0",
     "meteor-node-stubs": "^1.0.0",
     "vue": "^2.6.11",
     "vue-i18n": "^8.17.4",
     "vue-meteor-tracker": "^2.0.0-beta.5",
-    "vuetify": "^2.2.25"
+    "vuetify": "^2.2.26"
   },
   "meteor": {
     "mainModule": {
