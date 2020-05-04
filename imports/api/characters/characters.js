@@ -1,6 +1,6 @@
 import {Mongo} from 'meteor/mongo';
 
-const demonist = 'Demonist';
+const warlock = 'Warlock';
 const druid = 'Druid';
 const hunter = 'Hunter';
 const mage = 'Mage';
@@ -10,7 +10,7 @@ const shaman = 'Shaman';
 const warrior = 'Warrior';
 
 export const classes = [
-    demonist,
+    warlock,
     druid,
     hunter,
     mage,
