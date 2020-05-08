@@ -86,6 +86,7 @@
         methods: {
             setTheme() {
                 this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+                this.$cookies.set('darkTheme', this.$vuetify.theme.dark);
             }
         },
         meteor: {
@@ -100,6 +101,11 @@
                 return Character.find({}, {'sort': {'name': 1}}).fetch();
             },
         },
+        beforeCreate() {
+            if (this.$cookies.get('darkTheme') !== undefined) {
+                this.$vuetify.theme.dark = this.$cookies.get('darkTheme');
+            }
+        }
     };
 </script>
 

@@ -7,10 +7,12 @@ import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import 'vuetify/dist/vuetify.min.css';
 import Vuetify from 'vuetify/dist/vuetify.js';
-import VueMeteorTracker from 'vue-meteor-tracker'
+import VueMeteorTracker from 'vue-meteor-tracker';
+import VueCookies from 'vue-cookies';
 Vue.use(VueI18n);
 Vue.use(Vuetify);
 Vue.use(VueMeteorTracker);
+Vue.use(VueCookies);
 
 import App from '/imports/ui/App.vue';
 
