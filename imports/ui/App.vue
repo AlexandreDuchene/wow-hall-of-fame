@@ -98,7 +98,7 @@
                 return Achievement.find().fetch();
             },
             characters() {
-                return Character.find({}, {'sort': {'name': 1}}).fetch();
+                return Character.find({achievementsCount: {$gt: 0}}, {'sort': {'name': 1}}).fetch();
             },
         },
         beforeCreate() {
