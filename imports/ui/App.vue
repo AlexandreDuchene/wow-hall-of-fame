@@ -95,10 +95,31 @@
                 'characters': [],
             },
             achievements() {
-                return Achievement.find().fetch();
+                return Achievement.find(
+                    {},
+                    {transform: function(achievement) {
+                        achievement.characters.sort(function(a, b) {
+                            return a.name > b.name ? 1 : -1;
+                        });
+
+                        return achievement;
+                    }},
+                ).fetch();
             },
             characters() {
-                return Character.find({achievementsCount: {$gt: 0}}, {'sort': {'name': 1}}).fetch();
+                return Character.find(
+                    {achievementsCount: {$gt: 0}},
+                    {
+                        sort: {'name': 1},
+                        transform: function(character) {
+                            character.achievements.sort(function(a, b) {
+                                return a.dates[0].date > b.dates[0].date ? -1 : 1;
+                            });
+
+                            return character;
+                        }
+                    }
+                ).fetch();
             },
         },
         beforeCreate() {
