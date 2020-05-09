@@ -1,4 +1,4 @@
-import {addAchievementForCharacter, initAchievement} from "./achievements";
+import { addAchievementForCharacter, initAchievement } from "../achievements";
 
 const dunceCap = 'dunceCap';
 const carrotOnAStickId = 11122;
@@ -13,7 +13,6 @@ export const computeCastsAchievements = function (report) {
     // theMachine
     let maxTotalCasts = 0;
     let MaxTotalCastsCharacter;
-
 
     report.characters.forEach(function(character) {
         // dunceCap

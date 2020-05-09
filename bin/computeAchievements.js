@@ -1,7 +1,7 @@
 import { Report } from '/imports/api/reports/reports';
-import { computeDeathsAchievements } from "/imports/api/achievements/deaths";
-import { computeCastsAchievements } from "/imports/api/achievements/casts";
-import { computeDamageDoneAchievements } from "/imports/api/achievements/damageDone";
+import { computeDeathsAchievements } from "/imports/api/achievements/byReport/deaths";
+import { computeCastsAchievements } from "/imports/api/achievements/byReport/casts";
+import { computeDamageDoneAchievements } from "/imports/api/achievements/byReport/damageDone";
 
 const reports = Report.find();
 
