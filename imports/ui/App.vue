@@ -40,27 +40,29 @@
             <v-container fluid grid-list-xl>
                 <v-layout wrap justify-space-between>
                     <v-flex xs12 md8>
-                        <v-tabs v-model="activeTab" color="red darken-4">
-                            <v-tab v-for="tab in tabs" :key="tab">
-                                {{ $t(tab) }}
-                            </v-tab>
-                        </v-tabs>
-                        <v-tabs-items v-model="activeTab">
-                            <v-tab-item v-for="tab in tabs" :key="tab">
-                                <AchievementVue
-                                        v-if="tab === 'achievements'"
-                                        v-for="achievement in achievements"
-                                        :key="achievement._id"
-                                        :achievement="achievement"
-                                />
-                                <CharacterVue
-                                        v-if="tab === 'characters'"
-                                        v-for="character in characters"
-                                        :key="character._id"
-                                        :character="character"
-                                />
-                            </v-tab-item>
-                        </v-tabs-items>
+                        <v-card>
+                            <v-tabs v-model="activeTab" color="red darken-4">
+                                <v-tab v-for="tab in tabs" :key="tab">
+                                    {{ $t(tab) }}
+                                </v-tab>
+                            </v-tabs>
+                            <v-tabs-items v-model="activeTab">
+                                <v-tab-item v-for="tab in tabs" :key="tab">
+                                    <AchievementVue
+                                            v-if="tab === 'achievements'"
+                                            v-for="achievement in achievements"
+                                            :key="achievement._id"
+                                            :achievement="achievement"
+                                    />
+                                    <CharacterVue
+                                            v-if="tab === 'characters'"
+                                            v-for="character in characters"
+                                            :key="character._id"
+                                            :character="character"
+                                    />
+                                </v-tab-item>
+                            </v-tabs-items>
+                        </v-card>
                     </v-flex>
                     <v-flex xs12 md4>
                         <LatestAchievements></LatestAchievements>

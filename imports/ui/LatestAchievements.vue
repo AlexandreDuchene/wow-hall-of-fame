@@ -5,17 +5,22 @@
         </v-card-title>
         <v-list>
             <v-list-item v-for="achievement in achievements" link :href="settings.warcraftlogsUrl + 'reports/' + achievement.characters[0].dates[0].report" target="_blank">
+                <v-list-item-content>
                     <v-tooltip left>
                         <template v-slot:activator="{ on }">
-                            <v-list-item-content v-on="on">
+                            <v-list-item-title v-on="on" class="d-inline-flex">
                                 <v-img :src="'/img/achievement/' + achievement.img " max-height="1rem" max-width="1rem" class="mr-1"></v-img>
-                                {{ $t(achievement.name) + ' ' + $t('obtained-by').toLowerCase() }}
-                                <v-img :src="'img/class/' + achievement.characters[0].class.toLowerCase() + '.jpg'" max-height="1rem" max-width="1rem" class="ml-1 mr-1"></v-img>
-                                {{ achievement.characters[0].name + ' ' +  $t('the') + ' ' + $d(achievement.characters[0].dates[0].date, 'short') }}
-                            </v-list-item-content>
+                                {{ $t(achievement.name) }}
+                            </v-list-item-title>
                         </template>
                         <span>{{ $t(achievement.description) }}</span>
                     </v-tooltip>
+                    <v-list-item-subtitle class="d-inline-flex">
+                        {{ $t('obtained-by') }}
+                        <v-img :src="'img/class/' + achievement.characters[0].class.toLowerCase() + '.jpg'" max-height="1rem" max-width="1rem" class="ml-1 mr-1"></v-img>
+                        {{ achievement.characters[0].name + ' ' +  $t('the') + ' ' + $d(achievement.characters[0].dates[0].date, 'short') }}
+                    </v-list-item-subtitle>
+                </v-list-item-content>
             </v-list-item>
         </v-list>
     </v-card>
