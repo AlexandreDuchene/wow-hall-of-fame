@@ -37,6 +37,9 @@ Vue.mixin({
     }
 });
 
+export const Achievement = new Mongo.Collection('achievements');
+export const Character = new Mongo.Collection('characters');
+
 Meteor.startup(() => {
     new Vue({
         i18n,

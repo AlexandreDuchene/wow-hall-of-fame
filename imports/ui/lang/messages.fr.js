@@ -26,5 +26,6 @@ export const messages = {
         'dark-theme': 'Thême sombre',
         'obtained-by': 'Obtenu par',
         'the': 'le',
+        'latestAchievements': 'Derniers hauts faits',
     },
 };

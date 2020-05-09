@@ -37,32 +37,35 @@
         </v-navigation-drawer>
 
         <v-content>
-            <v-container fluid>
-
-                <v-tabs v-model="activeTab" color="red darken-4">
-                    <v-tab v-for="tab in tabs" :key="tab">
-                        {{ $t(tab) }}
-                    </v-tab>
-                </v-tabs>
-
-                <v-tabs-items v-model="activeTab">
-                    <v-tab-item v-for="tab in tabs" :key="tab">
-                        <v-expansion-panels multiple hover focusable accordion>
-                            <AchievementVue
-                                v-if="tab === 'achievements'"
-                                v-for="achievement in achievements"
-                                :key="achievement._id"
-                                :achievement="achievement"
-                            />
-                            <CharacterVue
-                                v-if="tab === 'characters'"
-                                v-for="character in characters"
-                                :key="character._id"
-                                :character="character"
-                            />
-                        </v-expansion-panels>
-                    </v-tab-item>
-                </v-tabs-items>
+            <v-container fluid grid-list-xl>
+                <v-layout wrap justify-space-between>
+                    <v-flex xs12 md8>
+                        <v-tabs v-model="activeTab" color="red darken-4">
+                            <v-tab v-for="tab in tabs" :key="tab">
+                                {{ $t(tab) }}
+                            </v-tab>
+                        </v-tabs>
+                        <v-tabs-items v-model="activeTab">
+                            <v-tab-item v-for="tab in tabs" :key="tab">
+                                <AchievementVue
+                                        v-if="tab === 'achievements'"
+                                        v-for="achievement in achievements"
+                                        :key="achievement._id"
+                                        :achievement="achievement"
+                                />
+                                <CharacterVue
+                                        v-if="tab === 'characters'"
+                                        v-for="character in characters"
+                                        :key="character._id"
+                                        :character="character"
+                                />
+                            </v-tab-item>
+                        </v-tabs-items>
+                    </v-flex>
+                    <v-flex xs12 md4>
+                        <LatestAchievements></LatestAchievements>
+                    </v-flex>
+                </v-layout>
             </v-container>
         </v-content>
 
@@ -74,14 +77,14 @@
 <script>
     import AchievementVue from "../ui/Achievement"
     import CharacterVue from "../ui/Character";
-
-    const Achievement = new Mongo.Collection('achievements');
-    const Character = new Mongo.Collection('characters');
+    import LatestAchievements from "../ui/LatestAchievements"
+    import { Achievement, Character } from "../../client/main";
 
     export default {
         components: {
             AchievementVue,
             CharacterVue,
+            LatestAchievements,
         },
         methods: {
             setTheme() {
@@ -124,7 +127,7 @@
         },
         beforeCreate() {
             if (this.$cookies.get('darkTheme') !== undefined) {
-                this.$vuetify.theme.dark = this.$cookies.get('darkTheme');
+                this.$vuetify.theme.dark = this.$cookies.get('darkTheme') === 'true';
             }
         }
     };
