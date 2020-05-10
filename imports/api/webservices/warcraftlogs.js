@@ -1,8 +1,12 @@
 import {httpGet, warcraftlogsKey, warcraftlogsApiPath} from "./webservices-config";
 
 // https://classic.warcraftlogs.com/v1/docs/
-const getCall = function (route) {
+const getCall = function (route, params = []) {
     let url  = warcraftlogsApiPath + route + (route.includes('?') ? '&' : '?') + 'api_key=' + warcraftlogsKey;
+
+    if (params.length > 0) {
+        url += '&' + params.join('&');
+    }
 
     return Meteor.wrapAsync(httpGet)(url);
 };
@@ -35,7 +39,7 @@ Meteor.methods({
     'warcraftLogs.getReportEvents': function (eventName, reportId) {
         return getCall('report/events/' + eventName + '/' + reportId + '?start=0&end=100000000000000');
     },
-    'warcraftLogs.getReportEventsSum': function (eventName, reportId) {
-        return getCall('report/tables/' + eventName + '/' + reportId + '?start=0&end=100000000000000');
+    'warcraftLogs.getReportEventsSum': function (eventName, reportId, params = []) {
+        return getCall('report/tables/' + eventName + '/' + reportId + '?start=0&end=100000000000000', params);
     }
 });

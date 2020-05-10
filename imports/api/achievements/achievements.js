@@ -1,6 +1,5 @@
 import { Mongo } from 'meteor/mongo';
 import { addAchievement, classes } from "../characters/characters";
-import {zones} from "../reports/reports";
 
 export const Achievement = new Mongo.Collection('achievements');
 Achievement.schema = new SimpleSchema({
@@ -88,10 +87,12 @@ export const addAchievementForCharacter = function(achievement, character, repor
             date: report.date,
         }];
 
-        delete characterForAchievement.achievementsCount
+        delete characterForAchievement.achievementsCount;
         delete characterForAchievement.achievements;
 
         achievement.characters.push(characterForAchievement);
+
+        achievement.count ++;
     }
 
     if (!alreadyHasAchievement) {
@@ -109,7 +110,7 @@ export const initAchievement = function(id)
     }
 
     return insertAchievement(id);
-}
+};
 
 const insertAchievement = function(id)
 {

@@ -1,6 +1,17 @@
 import { warcraftlogsGuildName, warcraftlogsRegion, warcraftlogsServer } from "/imports/api/webservices/webservices-config";
-import { Report, reportTypes } from '/imports/api/reports/reports';
-import {Character, classes} from "/imports/api/characters/characters";
+import {
+    casts,
+    Report,
+    reportTypes,
+    restoreMana,
+    goblinSapperCharge,
+    zoneBWL,
+    bomb,
+    damageTaken,
+    zoneMC,
+    lava
+} from '/imports/api/reports/reports';
+import { Character, classes } from "/imports/api/characters/characters";
 
 Meteor.call(
     'warcraftLogs.getReportsByGuild',
@@ -59,6 +70,49 @@ Meteor.call(
                             reportType,
                             report.id
                         );
+
+                        if (reportType === casts) {
+                            newReport[reportType]['abilities'] = {
+                                // Major mana potion
+                                restoreMana: Meteor.call(
+                                    'warcraftLogs.getReportEventsSum',
+                                    reportType,
+                                    report.id,
+                                    ['abilityid=' + restoreMana]
+                                ),
+                                // Goblin sapper charge
+                                goblinSapperCharge: Meteor.call(
+                                    'warcraftLogs.getReportEventsSum',
+                                    reportType,
+                                    report.id,
+                                    ['abilityid=' + goblinSapperCharge]
+                                )
+                            };
+                        }
+
+                        if (reportType === damageTaken) {
+                            // MC
+                            if (report.zone === zoneMC) {
+                                // Lava
+                                newReport[reportType]['abilities'] = {lava: Meteor.call(
+                                        'warcraftLogs.getReportEventsSum',
+                                        reportType,
+                                        report.id,
+                                        ['abilityid=' + lava]
+                                    )};
+                            }
+
+                            // BWL
+                            if (report.zone === zoneBWL) {
+                                // Bombs from goblin techs
+                                newReport[reportType]['abilities'] = {bomb: Meteor.call(
+                                    'warcraftLogs.getReportEventsSum',
+                                    reportType,
+                                    report.id,
+                                    ['abilityid=' + bomb]
+                                )};
+                            }
+                        }
                     } catch (e) {
                         console.log(e);
                         continue reportLoop;
