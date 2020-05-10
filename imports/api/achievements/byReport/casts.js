@@ -2,13 +2,18 @@ import { addAchievementForCharacter, initAchievement } from "../achievements";
 
 const dunceCap = 'dunceCap';
 const carrotOnAStickId = 11122;
+const kBoom = 'kBoom';
 const theMachine = 'theMachine';
+const tooMuchDrink = 'tooMuchDrink';
 
 export const computeCastsAchievements = function (report) {
-    const casts = report['casts']['entries'];
+    const characters = report['casts']['entries'];
+    const abilities = report['casts']['abilities'];
 
     const dunceCapAchievement = initAchievement(dunceCap);
+    const kBoomAchievement = initAchievement(kBoom);
     const theMachineAchievement = initAchievement(theMachine);
+    const tooMuchDrinkAchievement = initAchievement(tooMuchDrink);
 
     // theMachine
     let maxTotalCasts = 0;
@@ -17,17 +22,17 @@ export const computeCastsAchievements = function (report) {
     report.characters.forEach(function(character) {
         // dunceCap
         let hasCarrotOnAStickEquipped = false;
-        for (const cast of casts) {
-            if (cast.guid === character.guid) {
+        for (const char of characters) {
+            if (char.guid === character.guid) {
 
                 // theMachine
-                if (cast.total > maxTotalCasts) {
-                    maxTotalCasts = cast.total;
+                if (char.total > maxTotalCasts) {
+                    maxTotalCasts = char.total;
                     MaxTotalCastsCharacter = character;
                 }
 
                 // dunceCap
-                for (const item of cast.gear) {
+                for (const item of char.gear) {
                     if (item.id === carrotOnAStickId) {
                         hasCarrotOnAStickEquipped = true;
                     }
@@ -38,6 +43,26 @@ export const computeCastsAchievements = function (report) {
         // dunceCap
         if (hasCarrotOnAStickEquipped) {
             addAchievementForCharacter(dunceCapAchievement, character, report);
+        }
+
+        if (abilities !== undefined) {
+            // Major mana potions
+            if (abilities.restoreMana !== undefined) {
+                for (const char of abilities.restoreMana.entries) {
+                    if (char.guid === character.guid && char.total >= 10) {
+                        addAchievementForCharacter(tooMuchDrinkAchievement, character, report);
+                    }
+                }
+            }
+
+            // Goblin sapper charges
+            if (abilities.goblinSapperCharge !== undefined) {
+                for (const char of abilities.goblinSapperCharge.entries) {
+                    if (char.guid === character.guid && char.total >= 5) {
+                        addAchievementForCharacter(kBoomAchievement, character, report);
+                    }
+                }
+            }
         }
     });
 

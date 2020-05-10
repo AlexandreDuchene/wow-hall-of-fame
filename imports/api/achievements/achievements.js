@@ -109,7 +109,7 @@ export const initAchievement = function(id)
     }
 
     return insertAchievement(id);
-}
+};
 
 const insertAchievement = function(id)
 {
