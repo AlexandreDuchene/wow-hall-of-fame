@@ -1,3 +1,5 @@
+import {HTTP} from "meteor/http";
+
 SyncedCron.add({
     name: 'Synchronize external data',
     schedule: function(parser) {
@@ -5,7 +7,11 @@ SyncedCron.add({
         return parser.text('at 00:00');
     },
     job: function() {
-        import '/bin/syncData.js';
+        try {
+            import '/bin/syncData.js';
+        } catch (error) {
+            return error;
+        }
     }
 });
 
@@ -16,7 +22,11 @@ SyncedCron.add({
         return parser.text('at 01:00');
     },
     job: function() {
-        import '/bin/computeAchievements.js';
+        try {
+            import '/bin/computeAchievements.js';
+        } catch (error) {
+            return error;
+        }
     }
 });
 
