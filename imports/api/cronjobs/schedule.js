@@ -8,7 +8,7 @@ SyncedCron.add({
     },
     job: function() {
         try {
-            import '/bin/syncData.js';
+            Meteor.call('syncData');
         } catch (error) {
             return error;
         }
@@ -23,7 +23,7 @@ SyncedCron.add({
     },
     job: function() {
         try {
-            import '/bin/computeAchievements.js';
+            Meteor.call('computeAchievements');
         } catch (error) {
             return error;
         }

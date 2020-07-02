@@ -12,4 +12,5 @@ import '/imports/api/achievements/byReport/deaths.js';
 import '/imports/api/achievements/byReport/casts.js';
 import '/imports/api/achievements/server/publication.js';
 
+import '/imports/api/cronjobs/list.js';
 import '/imports/api/cronjobs/schedule.js';
